@@ -1,13 +1,16 @@
 {
   "dependencies": {
     "@ckeditor/ckeditor5-basic-styles": "^39.0.1",
+    "@ckeditor/ckeditor5-core": "^39.0.1",
     "@ckeditor/ckeditor5-dev-utils": "^38.3.1",
     "@ckeditor/ckeditor5-editor-classic": "^39.0.1",
     "@ckeditor/ckeditor5-essentials": "^39.0.1",
     "@ckeditor/ckeditor5-heading": "^39.0.1",
+    "@ckeditor/ckeditor5-list": "^39.0.1",
     "@ckeditor/ckeditor5-paragraph": "^39.0.1",
     "@ckeditor/ckeditor5-source-editing": "^39.0.1",
     "@ckeditor/ckeditor5-theme-lark": "^39.0.1",
+    "@ckeditor/ckeditor5-ui": "^39.0.1",
     "css-loader": "^5.2.7",
     "postcss-loader": "^4.3.0",
     "raw-loader": "^4.0.2",

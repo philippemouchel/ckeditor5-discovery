@@ -1,19 +1,20 @@
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 import { Bold, Underline, Strikethrough, Italic } from '@ckeditor/ckeditor5-basic-styles';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
-import { SourceEditing } from '@ckeditor/ckeditor5-source-editing';
 import { Heading } from '@ckeditor/ckeditor5-heading';
+import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
+import { List } from '@ckeditor/ckeditor5-list';
+import { SourceEditing } from '@ckeditor/ckeditor5-source-editing';
 
 ClassicEditor
     .create( document.querySelector( '#editor' ), {
         plugins: [
-            Essentials, Paragraph, Heading, SourceEditing,
+            Essentials, Heading, Paragraph, List, SourceEditing,
             Bold, Underline, Strikethrough, Italic,
         ],
         toolbar: [
             'bold', 'underline', 'strikethrough', 'italic', '|',
-            'heading', '|', 'sourceEditing',
+            'heading', '|', 'bulletedList', 'numberedList', '|', 'sourceEditing',
         ],
         heading: {
             options: [
