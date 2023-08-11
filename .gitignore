@@ -1,5 +1,8 @@
 # Packages.
 node_modules
 
+# Generated assets.
+dist
+
 # Standard IDE directories.
 .idea
