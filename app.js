@@ -9,6 +9,8 @@ import { SourceEditing } from '@ckeditor/ckeditor5-source-editing';
 import { Plugin } from '@ckeditor/ckeditor5-core';
 import { ButtonView } from '@ckeditor/ckeditor5-ui';
 
+import Abbreviation from './abbreviation/abbreviation';
+
 class Timestamp extends Plugin {
     init() {
         const editor = this.editor;
@@ -44,7 +46,7 @@ ClassicEditor
         plugins: [
             Essentials, Heading, Paragraph, List, SourceEditing,
             Bold, Underline, Strikethrough, Italic,
-            Timestamp,
+            Timestamp, Abbreviation,
         ],
         toolbar: [
             'sourceEditing', '|',
