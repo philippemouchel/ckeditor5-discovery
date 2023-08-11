@@ -12,8 +12,8 @@ ClassicEditor
             Bold, Underline, Strikethrough, Italic,
         ],
         toolbar: [
-            'bold', 'underline', 'strikethrough', 'italic',
-            'heading', 'sourceEditing',
+            'bold', 'underline', 'strikethrough', 'italic', '|',
+            'heading', '|', 'sourceEditing',
         ],
         heading: {
             options: [
