@@ -1,4 +1,5 @@
-import { View, LabeledFieldView, createLabeledInputText, ButtonView, submitHandler } from '@ckeditor/ckeditor5-ui';
+import { View, LabeledFieldView, createLabeledInputText, ButtonView, submitHandler, FocusCycler } from '@ckeditor/ckeditor5-ui';
+import { FocusTracker, KeystrokeHandler } from '@ckeditor/ckeditor5-utils';
 import { icons } from '@ckeditor/ckeditor5-core';
 
 /**
@@ -10,6 +11,11 @@ export default class FormView extends View {
     constructor( locale ) {
         super( locale );
 
+        // Accessibility improvement: tracking focus and keystroke.
+        this.focusTracker = new FocusTracker();
+        this.keystrokes = new KeystrokeHandler();
+
+        // Create the two form fields.
         this.abbrInputView = this._createInput( 'Add abbreviation' );
         this.titleInputView = this._createInput( 'Add title' );
 
@@ -37,6 +43,20 @@ export default class FormView extends View {
             this.cancelButtonView
         ] );
 
+        // Add "tab" navigation to the view items.
+        this._focusCycler = new FocusCycler( {
+            focusables: this.childViews,
+            focusTracker: this.focusTracker,
+            keystrokeHandler: this.keystrokes,
+            actions: {
+                // Navigate form fields backwards using the Shift + Tab keystroke.
+                focusPrevious: 'shift + tab',
+
+                // Navigate form fields forwards using the Tab key.
+                focusNext: 'tab'
+            }
+        } );
+
         // Define a <form> template and place the view inside.
         this.setTemplate( {
             tag: 'form',
@@ -48,6 +68,13 @@ export default class FormView extends View {
         } );
     }
 
+    destroy() {
+        super.destroy();
+
+        this.focusTracker.destroy();
+        this.keystrokes.destroy();
+    }
+
     render() {
         super.render();
 
@@ -56,6 +83,14 @@ export default class FormView extends View {
         submitHandler( {
             view: this
         } );
+
+        // Register the view items in the focus tracker.
+        this.childViews._items.forEach( view => {
+            this.focusTracker.add( view.element );
+        } );
+
+        // Start listening for the keystrokes coming from #element.
+        this.keystrokes.listenTo( this.element );
     }
 
     focus() {

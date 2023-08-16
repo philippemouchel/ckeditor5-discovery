@@ -68,6 +68,12 @@ export default class AbbreviationUI extends Plugin {
             callback: () => this._hideUI()
         } );
 
+        // Close the panel on "ESC" key press when the form has focus.
+        formView.keystrokes.set( 'Esc', ( data, cancel ) => {
+            this._hideUI();
+            cancel();
+        } );
+
         return formView;
     }
 
