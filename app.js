@@ -23,7 +23,8 @@ class Timestamp extends Plugin {
             const button = new ButtonView();
             button.set( {
                 label: 'Ts',
-                withText: true
+                tooltip: 'Timestamp (current date)',
+                withText: true,
             } );
 
             // Execute a callback function when the button is clicked.
@@ -51,11 +52,10 @@ ClassicEditor
             Timestamp, Abbreviation,
         ],
         toolbar: [
-            'sourceEditing', '|',
-            'bold', 'underline', 'strikethrough', 'italic', 'abbreviation', '|',
-            'heading', '|',
+            'sourceEditing', '|', 'heading', '|',
+            'bold', 'underline', 'strikethrough', 'italic', '|',
             'bulletedList', 'numberedList', '|',
-            'timestamp', '|',
+            'abbreviation', 'timestamp', '|',
 
         ],
         heading: {
@@ -69,6 +69,9 @@ ClassicEditor
     } )
     .then( editor => {
         CKEditorInspector.attach( editor );
+
+        // Expose for playing in the console.
+        window.editor = editor;
     } )
     .catch( error => {
         console.error( error.stack );
