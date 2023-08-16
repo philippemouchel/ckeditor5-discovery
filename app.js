@@ -57,6 +57,7 @@ ClassicEditor
             'bold', 'underline', 'strikethrough', 'italic', '|',
             'bulletedList', 'numberedList', '|',
             'abbreviation', 'timestamp', '|',
+            'simpleBox', '|',
 
         ],
         heading: {
