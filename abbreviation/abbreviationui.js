@@ -1,7 +1,9 @@
 import { Plugin } from '@ckeditor/ckeditor5-core';
-import {ButtonView, clickOutsideHandler, ContextualBalloon} from '@ckeditor/ckeditor5-ui';
+import { ButtonView, clickOutsideHandler, ContextualBalloon } from '@ckeditor/ckeditor5-ui';
+
 import FormView from './abbreviationview';
 import '../styles.css';
+import getRangeText from './utils.js';
 
 export default class AbbreviationUI extends Plugin {
 
@@ -93,10 +95,19 @@ export default class AbbreviationUI extends Plugin {
     }
 
     _showUI() {
+        const selection = this.editor.model.document.selection;
+
         this._balloon.add( {
             view: this.formView,
             position: this._getBalloonPositionData()
         } );
+
+        // Disable the input when the selection is not collapsed.
+        this.formView.abbrInputView.isEnabled = selection.getFirstRange().isCollapsed;
+
+        const selectedText = getRangeText( selection.getFirstRange() );
+        this.formView.abbrInputView.fieldView.value = selectedText;
+        this.formView.titleInputView.fieldView.value = '';
 
         this.formView.focus();
     }
