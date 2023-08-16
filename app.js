@@ -1,3 +1,5 @@
+import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
+
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 import { Bold, Underline, Strikethrough, Italic } from '@ckeditor/ckeditor5-basic-styles';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
@@ -50,10 +52,11 @@ ClassicEditor
         ],
         toolbar: [
             'sourceEditing', '|',
-            'bold', 'underline', 'strikethrough', 'italic', '|',
+            'bold', 'underline', 'strikethrough', 'italic', 'abbreviation', '|',
             'heading', '|',
             'bulletedList', 'numberedList', '|',
-            'timestamp',
+            'timestamp', '|',
+
         ],
         heading: {
             options: [
@@ -65,7 +68,8 @@ ClassicEditor
         }
     } )
     .then( editor => {
-        console.log( 'Editor was initialized', editor );
+        CKEditorInspector.attach( editor );
+        console.log( 'Editor was initialized, with CKEditorInspector', editor );
     } )
     .catch( error => {
         console.error( error.stack );
