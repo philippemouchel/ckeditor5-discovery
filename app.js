@@ -12,6 +12,7 @@ import { Plugin } from '@ckeditor/ckeditor5-core';
 import { ButtonView } from '@ckeditor/ckeditor5-ui';
 
 import Abbreviation from './abbreviation/abbreviation';
+import SimpleBox from './simplebox/simplebox';
 
 class Timestamp extends Plugin {
     init() {
@@ -49,7 +50,7 @@ ClassicEditor
         plugins: [
             Essentials, Heading, Paragraph, List, SourceEditing,
             Bold, Underline, Strikethrough, Italic,
-            Timestamp, Abbreviation,
+            Timestamp, Abbreviation, SimpleBox,
         ],
         toolbar: [
             'sourceEditing', '|', 'heading', '|',

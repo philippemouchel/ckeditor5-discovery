@@ -1,3 +1,6 @@
+/**
+ * Abbreviation plugin form style.
+ */
 .ck.ck-abbr-form {
     padding: var(--ck-spacing-large);
     display: grid;
