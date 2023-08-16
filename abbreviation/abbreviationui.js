@@ -2,8 +2,9 @@ import { Plugin } from '@ckeditor/ckeditor5-core';
 import { ButtonView, clickOutsideHandler, ContextualBalloon } from '@ckeditor/ckeditor5-ui';
 
 import FormView from './abbreviationview';
+import getRangeText from './utils';
+
 import '../styles.css';
-import getRangeText from './utils.js';
 
 export default class AbbreviationUI extends Plugin {
 
@@ -40,21 +41,15 @@ export default class AbbreviationUI extends Plugin {
         const editor = this.editor;
         const formView = new FormView( editor.locale );
 
+        // Execute the "addAbbreviation" command after submitting the form.
         this.listenTo( formView, 'submit', () => {
+            const value = {
+                abbr: formView.abbrInputView.fieldView.element.value,
+                title: formView.titleInputView.fieldView.element.value
+            };
+            editor.execute( 'addAbbreviation', value );
 
-            // Setting texts: title and abbreviation.
-            const title = formView.titleInputView.fieldView.element.value;
-            const abbr = formView.abbrInputView.fieldView.element.value;
-
-            editor.model.change( writer => {
-                editor.model.insertContent(
-                    writer.createText( abbr, { abbreviation: title } )
-                );
-            } );
-
-            // Hide the form view after submit.
             this._hideUI();
-
         } );
 
         // Hide the form view after clicking the "Cancel" button.
@@ -97,6 +92,9 @@ export default class AbbreviationUI extends Plugin {
     _showUI() {
         const selection = this.editor.model.document.selection;
 
+        // Check the value of the command.
+        const commandValue = this.editor.commands.get( 'addAbbreviation' ).value;
+
         this._balloon.add( {
             view: this.formView,
             position: this._getBalloonPositionData()
@@ -105,9 +103,18 @@ export default class AbbreviationUI extends Plugin {
         // Disable the input when the selection is not collapsed.
         this.formView.abbrInputView.isEnabled = selection.getFirstRange().isCollapsed;
 
-        const selectedText = getRangeText( selection.getFirstRange() );
-        this.formView.abbrInputView.fieldView.value = selectedText;
-        this.formView.titleInputView.fieldView.value = '';
+        // Fill the form using the state (value) of the command.
+        if ( commandValue ) {
+            this.formView.abbrInputView.fieldView.value = commandValue.abbr;
+            this.formView.titleInputView.fieldView.value = commandValue.title;
+        }
+            // If the command has no value, put the currently selected text (not collapsed)
+        // in the first field and empty the second in that case.
+        else {
+            const selectedText = getRangeText( selection.getFirstRange() );
+            this.formView.abbrInputView.fieldView.value = selectedText;
+            this.formView.titleInputView.fieldView.value = '';
+        }
 
         this.formView.focus();
     }

@@ -1,9 +1,16 @@
 import { Plugin } from '@ckeditor/ckeditor5-core';
 
+import AbbreviationCommand from './abbreviationcommand';
+
 export default class AbbreviationEditing extends Plugin {
     init() {
         this._defineSchema();
         this._defineConverters();
+
+        // Attach the "Abbr" command to the editor and name it.
+        this.editor.commands.add(
+            'addAbbreviation', new AbbreviationCommand( this.editor )
+        );
     }
 
     _defineSchema() {

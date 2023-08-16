@@ -69,7 +69,6 @@ ClassicEditor
     } )
     .then( editor => {
         CKEditorInspector.attach( editor );
-        console.log( 'Editor was initialized, with CKEditorInspector', editor );
     } )
     .catch( error => {
         console.error( error.stack );
