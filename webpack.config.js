@@ -1,3 +1,8 @@
+/**
+ * @license Copyright (c) 2003-2022, CKSource Holding sp. z o.o. All rights reserved.
+ * For licensing, see LICENSE.md.
+ */
+
 'use strict';
 
 const path = require( 'path' );
@@ -21,7 +26,7 @@ module.exports = {
                 use: [ 'raw-loader' ]
             },
             {
-                test: /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/,
+                test: [/ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/, /\.css$/],
 
                 use: [
                     {
@@ -53,6 +58,6 @@ module.exports = {
     // Useful for debugging.
     devtool: 'source-map',
 
-    // By default webpack logs warnings if the bundle is bigger than 200kb.
+    // By default, webpack logs warnings if the bundle is bigger than 200kb.
     performance: { hints: false }
 };
