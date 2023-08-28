@@ -31,13 +31,6 @@ export default class NoteBlockEditing extends Plugin {
             allowIn: 'noteBlockSection',
             allowContentOf: '$block',
         } );
-
-        // // Define the "noteBlock label" schema.
-        // schema.register( 'noteBlockLabel', {
-        //     allowIn: 'noteBlockParagraph',
-        //     inheritAllFrom: '$inlineObject',
-        //     allowContentOf: '$text',
-        // } );
     }
 
     _defineConverters() {
@@ -84,43 +77,9 @@ export default class NoteBlockEditing extends Plugin {
         conversion.for( 'editingDowncast' ).elementToElement( {
             model: 'noteBlockParagraph',
             view: ( modelElement, { writer: viewWriter } ) => {
-                // Note: You use a more specialized createEditableElement() method here.
                 const p = viewWriter.createEditableElement( 'p', { class: 'note-block-paragraph small' } );
-
                 return toWidgetEditable( p, viewWriter );
             }
         } );
-
-        // <noteBlockLabel> converters
-        // conversion.elementToElement( {
-        //     model: 'noteBlockLabel',
-        //     view: {
-        //         name: 'span',
-        //         classes: 'note-block-label',
-        //     }
-        // } );
-        // conversion.for( 'upcast' ).elementToElement( {
-        //     model: 'noteBlockLabel',
-        //     view: {
-        //         name: 'span',
-        //         classes: 'note-block-label',
-        //     }
-        // } );
-        // conversion.for( 'dataDowncast' ).elementToElement( {
-        //     model: 'noteBlockLabel',
-        //     view: {
-        //         name: 'span',
-        //         classes: 'note-block-label',
-        //     }
-        // } );
-        // conversion.for( 'editingDowncast' ).elementToElement( {
-        //     model: 'noteBlockLabel',
-        //     view: ( modelElement, { writer: viewWriter } ) => {
-        //         // Note: You use a more specialized createEditableElement() method here.
-        //         const span = viewWriter.createEditableElement( 'span', { class: 'note-block-label'});
-        //
-        //         return toWidgetEditable( span, viewWriter );
-        //     }
-        // } );
     }
 }

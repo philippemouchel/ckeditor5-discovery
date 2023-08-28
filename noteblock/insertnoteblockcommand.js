@@ -21,14 +21,11 @@ export default class InsertNoteBlockCommand extends Command {
 function createNoteBlock( writer ) {
     const noteBlock = writer.createElement( 'noteBlockSection' );
     const noteBlockParagraph = writer.createElement( 'noteBlockParagraph' );
-    // const noteBlockLabel = writer.createElement( 'noteBlockLabel' );
 
     // Build the note block.
     writer.append( noteBlockParagraph, noteBlock );
-    // writer.append( noteBlockLabel, noteBlockParagraph );
 
     // Fill it with default values.
-    // writer.appendText('Note: ', noteBlockLabel);
     writer.appendText('Note: note content, to be replaced.', noteBlockParagraph)
 
     return noteBlock;
