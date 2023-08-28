@@ -12,21 +12,24 @@ export default class InsertNoteBlockCommand extends Command {
     refresh() {
         const model = this.editor.model;
         const selection = model.document.selection;
-        const allowedIn = model.schema.findAllowedParent( selection.getFirstPosition(), 'noteBlock' );
+        const allowedIn = model.schema.findAllowedParent( selection.getFirstPosition(), 'noteBlockSection' );
 
         this.isEnabled = allowedIn !== null;
     }
 }
 
 function createNoteBlock( writer ) {
-    const noteBlock = writer.createElement( 'noteBlock' );
+    const noteBlock = writer.createElement( 'noteBlockSection' );
     const noteBlockParagraph = writer.createElement( 'noteBlockParagraph' );
-    const noteBlockLabel = writer.createElement( 'noteBlockLabel' );
-    const noteBlockContent = writer.createElement( 'noteBlockContent' );
+    // const noteBlockLabel = writer.createElement( 'noteBlockLabel' );
 
+    // Build the note block.
     writer.append( noteBlockParagraph, noteBlock );
-    writer.append( noteBlockLabel, noteBlockParagraph );
-    writer.append( noteBlockContent, noteBlockParagraph );
+    // writer.append( noteBlockLabel, noteBlockParagraph );
+
+    // Fill it with default values.
+    // writer.appendText('Note: ', noteBlockLabel);
+    writer.appendText('Note: note content, to be replaced.', noteBlockParagraph)
 
     return noteBlock;
 }

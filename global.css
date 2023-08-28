@@ -21,3 +21,17 @@
 .simple-box-title {
     margin-bottom: 10px;
 }
+
+/**
+ * Some CSS to pimp DXP plugins
+ */
+.border-left--vui-yellow {
+    border-left-color: yellow;
+    border-left-style: solid;
+}
+.border-width-2 {
+    border-width: 2px;
+}
+.pl-3 {
+    padding-left: 3px;
+}
