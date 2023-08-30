@@ -24,8 +24,18 @@ function createWarningBlock( writer ) {
     // Build warning icon.
     const warningBlockIconContainer = writer.createElement( 'warningBlockIconContainer' );
     const warningBlockSvg = writer.createElement( 'warningBlockSvg' );
+    const warningBlockSvgG1 = writer.createElement( 'warningBlockSvgG1' );
+    const warningBlockSvgG1Path = writer.createElement( 'warningBlockSvgG1Path' );
+    const warningBlockSvgCircle = writer.createElement( 'warningBlockSvgCircle' );
+    const warningBlockSvgG2 = writer.createElement( 'warningBlockSvgG2' );
+    const warningBlockSvgG2Path = writer.createElement( 'warningBlockSvgG2Path' );
     writer.append( warningBlockIconContainer, warningBlock );
     writer.append( warningBlockSvg, warningBlockIconContainer );
+    writer.append( warningBlockSvgG1, warningBlockSvg );
+    writer.append( warningBlockSvgG1Path, warningBlockSvgG1 );
+    writer.append( warningBlockSvgCircle, warningBlockSvg );
+    writer.append( warningBlockSvgG2, warningBlockSvg );
+    writer.append( warningBlockSvgG2Path, warningBlockSvgG2 );
 
     // Build body and 1 paragraph.
     const warningBlockBodyContainer = writer.createElement( 'warningBlockBodyContainer' );

@@ -27,12 +27,46 @@ export default class WarningBlockEditing extends Plugin {
         schema.register( 'warningBlockIconContainer', {
             allowIn: 'warningBlockSection',
             allowContentOf: '$block',
+            isSelectable: false,
         } );
 
-        // Define the "warningBlock icon container" schema.
+        // Define the "warningBlock icon svg" schema.
         schema.register( 'warningBlockSvg', {
             allowIn: 'warningBlockIconContainer',
             allowContentOf: '$block',
+            isSelectable: false,
+        } );
+
+        // Define the "warningBlock icon G1" schema.
+        schema.register( 'warningBlockSvgG1', {
+            allowIn: 'warningBlockSvg',
+            allowContentOf: '$block',
+            isSelectable: false,
+        } );
+
+        // Define the "warningBlock icon G1 path" schema.
+        schema.register( 'warningBlockSvgG1Path', {
+            allowIn: 'warningBlockG1',
+            isSelectable: false,
+        } );
+
+        // Define the "warningBlock icon circle" schema.
+        schema.register( 'warningBlockSvgCircle', {
+            allowIn: 'warningBlockSvg',
+            isSelectable: false,
+        } );
+
+        // Define the "warningBlock icon G2" schema.
+        schema.register( 'warningBlockSvgG2', {
+            allowIn: 'warningBlockSvg',
+            allowContentOf: '$block',
+            isSelectable: false,
+        } );
+
+        // Define the "warningBlock icon G2 path" schema.
+        schema.register( 'warningBlockSvgG2Path', {
+            allowIn: 'warningBlockG2',
+            isSelectable: false,
         } );
 
         // Define the "warningBlock body container" schema.
@@ -129,28 +163,63 @@ export default class WarningBlockEditing extends Plugin {
                     viewBox: '0 0 20.1 20.1',
                     xmlns: 'http://www.w3.org/2000/svg',
                 } );
-                const g1 = viewWriter.createContainerElement('g');
-                const path1 = viewWriter.createUIElement('path', {
+                return toWidget( svg, viewWriter );
+            }
+        } );
+
+        // <warningBlockSvgG1> converters
+        conversion.elementToElement( {
+            model: 'warningBlockSvgG1',
+            view: {
+                name: 'g',
+            }
+        } );
+
+        // <warningBlockSvgG1Path> converters
+        conversion.elementToElement( {
+            model: 'warningBlockSvgG1Path',
+            view: {
+                name: 'path',
+                attributes: {
                     d: 'M9.3 6.7c0-.4.3-.7.8-.7.4 0 .7.3.7.7 0 .4-.3.7-.7.7-.5.1-.8-.2-.8-.7zm.3 2.1h1v5.3h-1V8.8z',
                     fill: '_svg-fill',
-                } );
-                const circle = viewWriter.createUIElement('circle', {
+                }
+            }
+        } );
+
+        // <warningBlockSvgCircle> converters
+        conversion.elementToElement( {
+            model: 'warningBlockSvgCircle',
+            view: {
+                name: 'circle',
+                attributes: {
                     cx: '10.1',
                     cy: '10.1',
                     fill: '_svg-fill',
                     r: '10.1',
-                } );
-                const g2 = viewWriter.createContainerElement('g', {
+                }
+            }
+        } );
+
+        // <warningBlockSvgG2> converters
+        conversion.elementToElement( {
+            model: 'warningBlockSvgG2',
+            view: {
+                name: 'g',
+                attributes: {
                     fill: '#1d1d1d',
-                } );
-                const path2 = viewWriter.createUIElement('path', {
+                }
+            }
+        } );
+
+        // <warningBlockSvgG2Path> converters
+        conversion.elementToElement( {
+            model: 'warningBlockSvgG2Path',
+            view: {
+                name: 'path',
+                attributes: {
                     d: 'M9.3 6.7c0-.4.3-.7.8-.7.4 0 .7.3.7.7 0 .4-.3.7-.7.7-.5.1-.8-.2-.8-.7zm.3 2.1h1v5.3h-1V8.8z',
-                } );
-                svg._appendChild([g1, circle, g2]);
-                g1._appendChild(path1);
-                g2._appendChild(path2);
-                console.log(svg);
-                return toWidget( svg, viewWriter );
+                }
             }
         } );
 
