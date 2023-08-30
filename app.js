@@ -14,6 +14,7 @@ import { ButtonView } from '@ckeditor/ckeditor5-ui';
 import Abbreviation from './abbreviation/abbreviation';
 import SimpleBox from './simplebox/simplebox';
 import NoteBlock from './noteblock/noteblock';
+import WarningBlock from './warningblock/warningblock';
 
 class Timestamp extends Plugin {
     init() {
@@ -52,14 +53,14 @@ ClassicEditor
             Essentials, Heading, Paragraph, List, SourceEditing,
             Bold, Underline, Strikethrough, Italic,
             Timestamp, Abbreviation, SimpleBox,
-            NoteBlock,
+            NoteBlock, WarningBlock,
         ],
         toolbar: [
             'sourceEditing', '|', 'heading', '|',
             'bold', 'underline', 'strikethrough', 'italic', '|',
             'bulletedList', 'numberedList', '|',
             'abbreviation', 'timestamp', '|', 'simpleBox', '|',
-            'noteBlock', '|',
+            'noteBlock', 'warningBlock', '|',
         ],
         heading: {
             options: [
