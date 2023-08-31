@@ -47,36 +47,70 @@ class Timestamp extends Plugin {
     }
 }
 
-ClassicEditor
-    .create( document.querySelector( '#editor' ), {
-        plugins: [
-            Essentials, Heading, Paragraph, List, SourceEditing,
-            Bold, Underline, Strikethrough, Italic,
-            Timestamp, Abbreviation, SimpleBox,
-            NoteBlock, WarningBlock,
-        ],
-        toolbar: [
-            'sourceEditing', '|', 'heading', '|',
-            'bold', 'underline', 'strikethrough', 'italic', '|',
-            'bulletedList', 'numberedList', '|',
-            'abbreviation', 'timestamp', '|', 'simpleBox', '|',
-            'noteBlock', 'warningBlock', '|',
-        ],
-        heading: {
-            options: [
-                { model: 'heading2', view: 'h2', title: 'Heading 2' },
-                { model: 'heading3', view: 'h3', title: 'Heading 3' },
-                { model: 'heading4', view: 'h4', title: 'Heading 4' },
-                { model: 'paragraph', title: 'Paragraph' },
-            ]
-        }
-    } )
-    .then( editor => {
-        CKEditorInspector.attach( editor );
+// Instantiate editor container and button.
+let editorContainer = document.getElementById('editor');
+let editorBuilderButton = document.getElementById('build-editor');
+let editorDestroyerButton = document.getElementById('destroy-editor');
 
-        // Expose for playing in the console.
-        window.editor = editor;
-    } )
-    .catch( error => {
-        console.error( error.stack );
-    } );
+// Init editor on page load.
+buildEditor();
+
+// Attach functions to buttons click event.
+editorBuilderButton.onclick = function() { buildEditor() };
+editorDestroyerButton.onclick = function() { destroyEditor() };
+
+/**
+ * Build the CKEditor in the editor container.
+ */
+function buildEditor() {
+    ClassicEditor
+        .create( editorContainer, {
+            plugins: [
+                Essentials, Heading, Paragraph, List, SourceEditing,
+                Bold, Underline, Strikethrough, Italic,
+                Timestamp, Abbreviation, SimpleBox,
+                NoteBlock, WarningBlock,
+            ],
+            toolbar: [
+                'sourceEditing', '|', 'heading', '|',
+                'bold', 'underline', 'strikethrough', 'italic', '|',
+                'bulletedList', 'numberedList', '|',
+                'abbreviation', 'timestamp', '|', 'simpleBox', '|',
+                'noteBlock', 'warningBlock', '|',
+            ],
+            heading: {
+                options: [
+                    { model: 'heading2', view: 'h2', title: 'Heading 2' },
+                    { model: 'heading3', view: 'h3', title: 'Heading 3' },
+                    { model: 'heading4', view: 'h4', title: 'Heading 4' },
+                    { model: 'paragraph', title: 'Paragraph' },
+                ]
+            }
+        } )
+        .then( editor => {
+            CKEditorInspector.attach( editor );
+            window.editor = editor;
+            editorBuilderButton.disabled = true;
+            editorDestroyerButton.disabled = false;
+        } )
+        .catch( error => {
+            console.error( error.stack );
+        } );
+}
+
+/**
+ * Replace the CKEditor with its data, in the editor container.
+ */
+function destroyEditor() {
+    let editorData = editor.getData();
+    editor
+        .destroy()
+        .then(r => {
+            editorBuilderButton.disabled = false;
+            editorDestroyerButton.disabled = true;
+        } )
+        .catch( error => {
+            console.error( error.stack );
+        } );
+    editorContainer.innerHTML = editorData;
+}

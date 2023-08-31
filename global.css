@@ -1,3 +1,8 @@
+fieldset#editor-interactions {
+    margin: 1rem 0;
+    border: none;
+}
+
 /**
  * Simplebox plugin style.
  */
