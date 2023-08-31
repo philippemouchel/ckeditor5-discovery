@@ -40,13 +40,13 @@ export default class WarningBlockEditing extends Plugin {
         // Define the "warningBlock icon G1" schema.
         schema.register( 'warningBlockSvgG1', {
             allowIn: 'warningBlockSvg',
-            allowContentOf: '$block',
+            // allowContentOf: '$block',
             isSelectable: false,
         } );
 
         // Define the "warningBlock icon G1 path" schema.
         schema.register( 'warningBlockSvgG1Path', {
-            allowIn: 'warningBlockG1',
+            allowIn: 'warningBlockSvgG1',
             isSelectable: false,
         } );
 
@@ -59,13 +59,13 @@ export default class WarningBlockEditing extends Plugin {
         // Define the "warningBlock icon G2" schema.
         schema.register( 'warningBlockSvgG2', {
             allowIn: 'warningBlockSvg',
-            allowContentOf: '$block',
+            // allowContentOf: '$block',
             isSelectable: false,
         } );
 
         // Define the "warningBlock icon G2 path" schema.
         schema.register( 'warningBlockSvgG2Path', {
-            allowIn: 'warningBlockG2',
+            allowIn: 'warningBlockSvgG2',
             isSelectable: false,
         } );
 
@@ -172,6 +172,7 @@ export default class WarningBlockEditing extends Plugin {
             model: 'warningBlockSvgG1',
             view: {
                 name: 'g',
+                classes: ['svg-g1'],
             }
         } );
 
@@ -180,6 +181,7 @@ export default class WarningBlockEditing extends Plugin {
             model: 'warningBlockSvgG1Path',
             view: {
                 name: 'path',
+                classes: ['svg-g1-path'],
                 attributes: {
                     d: 'M9.3 6.7c0-.4.3-.7.8-.7.4 0 .7.3.7.7 0 .4-.3.7-.7.7-.5.1-.8-.2-.8-.7zm.3 2.1h1v5.3h-1V8.8z',
                     fill: '_svg-fill',
@@ -192,6 +194,7 @@ export default class WarningBlockEditing extends Plugin {
             model: 'warningBlockSvgCircle',
             view: {
                 name: 'circle',
+                classes: ['svg-circle'],
                 attributes: {
                     cx: '10.1',
                     cy: '10.1',
@@ -206,6 +209,7 @@ export default class WarningBlockEditing extends Plugin {
             model: 'warningBlockSvgG2',
             view: {
                 name: 'g',
+                classes: ['svg-g2'],
                 attributes: {
                     fill: '#1d1d1d',
                 }
@@ -217,6 +221,7 @@ export default class WarningBlockEditing extends Plugin {
             model: 'warningBlockSvgG2Path',
             view: {
                 name: 'path',
+                classes: ['svg-g2-path'],
                 attributes: {
                     d: 'M9.3 6.7c0-.4.3-.7.8-.7.4 0 .7.3.7.7 0 .4-.3.7-.7.7-.5.1-.8-.2-.8-.7zm.3 2.1h1v5.3h-1V8.8z',
                 }
