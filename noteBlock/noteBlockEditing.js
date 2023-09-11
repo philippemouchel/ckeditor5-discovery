@@ -1,7 +1,7 @@
 import { Plugin } from '@ckeditor/ckeditor5-core';
 import { Widget, toWidget, toWidgetEditable } from '@ckeditor/ckeditor5-widget';
 
-import InsertNoteBlockCommand from './insertnoteblockcommand';
+import InsertNoteBlockCommand from './insertNoteBlockCommand';
 
 export default class NoteBlockEditing extends Plugin {
     static get requires() {                                                    // ADDED

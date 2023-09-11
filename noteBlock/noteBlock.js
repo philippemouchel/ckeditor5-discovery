@@ -1,5 +1,5 @@
-import NoteBlockEditing from './noteblockediting';
-import NoteBlockUI from './noteblockui';
+import NoteBlockEditing from './noteBlockEditing';
+import NoteBlockUI from './noteBlockUI';
 import { Plugin } from '@ckeditor/ckeditor5-core';
 
 export default class NoteBlock extends Plugin {

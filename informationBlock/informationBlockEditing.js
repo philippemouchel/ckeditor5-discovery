@@ -1,9 +1,9 @@
 import { Plugin } from '@ckeditor/ckeditor5-core';
 import { Widget, toWidget, toWidgetEditable } from '@ckeditor/ckeditor5-widget';
 
-import InsertWarningBlockCommand from './insertwarningblockcommand';
+import InsertInformationBlockCommand from './insertInformationBlockCommand';
 
-export default class WarningBlockEditing extends Plugin {
+export default class InformationBlockEditing extends Plugin {
     static get requires() {                                                    // ADDED
         return [ Widget ];
     }
@@ -12,73 +12,73 @@ export default class WarningBlockEditing extends Plugin {
         this._defineSchema();
         this._defineConverters();
 
-        this.editor.commands.add( 'insertWarningBlock', new InsertWarningBlockCommand( this.editor ) );
+        this.editor.commands.add( 'insertInformationBlock', new InsertInformationBlockCommand( this.editor ) );
     }
 
     _defineSchema() {
         const schema = this.editor.model.schema;
 
-        // Define the "warningBlock" schema.
-        schema.register( 'warningBlockSection', {
+        // Define the "informationBlock" schema.
+        schema.register( 'informationBlockSection', {
             inheritAllFrom: '$blockObject'
         } );
 
-        // Define the "warningBlock icon container" schema.
-        schema.register( 'warningBlockIconContainer', {
-            allowIn: 'warningBlockSection',
+        // Define the "informationBlock icon container" schema.
+        schema.register( 'informationBlockIconContainer', {
+            allowIn: 'informationBlockSection',
             allowContentOf: '$block',
             isSelectable: false,
         } );
 
-        // Define the "warningBlock icon svg" schema.
-        schema.register( 'warningBlockSvg', {
-            allowIn: 'warningBlockIconContainer',
+        // Define the "informationBlock icon svg" schema.
+        schema.register( 'informationBlockSvg', {
+            allowIn: 'informationBlockIconContainer',
             allowContentOf: '$block',
             isSelectable: false,
         } );
 
-        // Define the "warningBlock icon G1" schema.
-        schema.register( 'warningBlockSvgG1', {
-            allowIn: 'warningBlockSvg',
+        // Define the "informationBlock icon G1" schema.
+        schema.register( 'informationBlockSvgG1', {
+            allowIn: 'informationBlockSvg',
             // allowContentOf: '$block',
             isSelectable: false,
         } );
 
-        // Define the "warningBlock icon G1 path" schema.
-        schema.register( 'warningBlockSvgG1Path', {
-            allowIn: 'warningBlockSvgG1',
+        // Define the "informationBlock icon G1 path" schema.
+        schema.register( 'informationBlockSvgG1Path', {
+            allowIn: 'informationBlockSvgG1',
             isSelectable: false,
         } );
 
-        // Define the "warningBlock icon circle" schema.
-        schema.register( 'warningBlockSvgCircle', {
-            allowIn: 'warningBlockSvg',
+        // Define the "informationBlock icon circle" schema.
+        schema.register( 'informationBlockSvgCircle', {
+            allowIn: 'informationBlockSvg',
             isSelectable: false,
         } );
 
-        // Define the "warningBlock icon G2" schema.
-        schema.register( 'warningBlockSvgG2', {
-            allowIn: 'warningBlockSvg',
+        // Define the "informationBlock icon G2" schema.
+        schema.register( 'informationBlockSvgG2', {
+            allowIn: 'informationBlockSvg',
             // allowContentOf: '$block',
             isSelectable: false,
         } );
 
-        // Define the "warningBlock icon G2 path" schema.
-        schema.register( 'warningBlockSvgG2Path', {
-            allowIn: 'warningBlockSvgG2',
+        // Define the "informationBlock icon G2 path" schema.
+        schema.register( 'informationBlockSvgG2Path', {
+            allowIn: 'informationBlockSvgG2',
             isSelectable: false,
         } );
 
-        // Define the "warningBlock body container" schema.
-        schema.register( 'warningBlockBodyContainer', {
-            allowIn: 'warningBlockSection',
+        // Define the "informationBlock body container" schema.
+        schema.register( 'informationBlockBodyContainer', {
+            allowIn: 'informationBlockSection',
             allowContentOf: '$block',
         } );
 
-        // Define the "warningBlock body paragraph" schema.
-        schema.register( 'warningBlockBodyParagraph', {
+        // Define the "informationBlock body paragraph" schema.
+        schema.register( 'informationBlockBodyParagraph', {
             // isLimit: true,
-            allowIn: 'warningBlockBodyContainer',
+            allowIn: 'informationBlockBodyContainer',
             allowContentOf: '$block',
         } );
     }
@@ -86,55 +86,55 @@ export default class WarningBlockEditing extends Plugin {
     _defineConverters() {
         const conversion = this.editor.conversion;
 
-        // <warningBlockSection> converters
+        // <informationBlockSection> converters
         conversion.for( 'upcast' ).elementToElement( {
-            model: 'warningBlockSection',
+            model: 'informationBlockSection',
             view: {
                 name: 'section',
                 classes: ['information-item', 'mb-3', 'p-4', 'd-flex', 'align-items-center'],
             }
         } );
         conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'warningBlockSection',
+            model: 'informationBlockSection',
             view: {
                 name: 'section',
                 classes: ['information-item', 'mb-3', 'p-4', 'd-flex', 'align-items-center'],
             }
         } );
         conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'warningBlockSection',
+            model: 'informationBlockSection',
             view: ( modelElement, { writer: viewWriter } ) => {
                 const section = viewWriter.createContainerElement( 'section', { class: 'information-item mb-3 p-4 d-flex align-items-center' } );
-                return toWidget( section, viewWriter, { label: 'Warning block widget' } );
+                return toWidget( section, viewWriter, { label: 'Information block widget' } );
             }
         } );
 
-        // <warningBlockIconContainer> converters
+        // <informationBlockIconContainer> converters
         conversion.for( 'upcast' ).elementToElement( {
-            model: 'warningBlockIconContainer',
+            model: 'informationBlockIconContainer',
             view: {
                 name: 'div',
                 classes: ['flex-start']
             }
         } );
         conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'warningBlockIconContainer',
+            model: 'informationBlockIconContainer',
             view: {
                 name: 'div',
                 classes: ['flex-start']
             }
         } );
         conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'warningBlockIconContainer',
+            model: 'informationBlockIconContainer',
             view: ( modelElement, { writer: viewWriter } ) => {
                 const div = viewWriter.createContainerElement( 'div', { class: 'flex-start' } );
                 return toWidget( div, viewWriter );
             }
         } );
 
-        // <warningBlockSvg> converters
+        // <informationBlockSvg> converters
         conversion.for( 'upcast' ).elementToElement( {
-            model: 'warningBlockSvg',
+            model: 'informationBlockSvg',
             view: {
                 name: 'svg',
                 classes: ['svg-fill--primary', 'svg-size--2', 'mr-2'],
@@ -145,7 +145,7 @@ export default class WarningBlockEditing extends Plugin {
             }
         } );
         conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'warningBlockSvg',
+            model: 'informationBlockSvg',
             view: {
                 name: 'svg',
                 classes: ['svg-fill--primary', 'svg-size--2', 'mr-2'],
@@ -156,7 +156,7 @@ export default class WarningBlockEditing extends Plugin {
             }
         } );
         conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'warningBlockSvg',
+            model: 'informationBlockSvg',
             view: ( modelElement, { writer: viewWriter } ) => {
                 const svg = viewWriter.createContainerElement( 'svg', {
                     class: 'svg-fill--primary svg-size--2 mr-2',
@@ -167,18 +167,18 @@ export default class WarningBlockEditing extends Plugin {
             }
         } );
 
-        // <warningBlockSvgG1> converters
+        // <informationBlockSvgG1> converters
         conversion.elementToElement( {
-            model: 'warningBlockSvgG1',
+            model: 'informationBlockSvgG1',
             view: {
                 name: 'g',
                 classes: ['svg-g1'],
             }
         } );
 
-        // <warningBlockSvgG1Path> converters
+        // <informationBlockSvgG1Path> converters
         conversion.elementToElement( {
-            model: 'warningBlockSvgG1Path',
+            model: 'informationBlockSvgG1Path',
             view: {
                 name: 'path',
                 classes: ['svg-g1-path'],
@@ -189,9 +189,9 @@ export default class WarningBlockEditing extends Plugin {
             }
         } );
 
-        // <warningBlockSvgCircle> converters
+        // <informationBlockSvgCircle> converters
         conversion.elementToElement( {
-            model: 'warningBlockSvgCircle',
+            model: 'informationBlockSvgCircle',
             view: {
                 name: 'circle',
                 classes: ['svg-circle'],
@@ -204,9 +204,9 @@ export default class WarningBlockEditing extends Plugin {
             }
         } );
 
-        // <warningBlockSvgG2> converters
+        // <informationBlockSvgG2> converters
         conversion.elementToElement( {
-            model: 'warningBlockSvgG2',
+            model: 'informationBlockSvgG2',
             view: {
                 name: 'g',
                 classes: ['svg-g2'],
@@ -216,9 +216,9 @@ export default class WarningBlockEditing extends Plugin {
             }
         } );
 
-        // <warningBlockSvgG2Path> converters
+        // <informationBlockSvgG2Path> converters
         conversion.elementToElement( {
-            model: 'warningBlockSvgG2Path',
+            model: 'informationBlockSvgG2Path',
             view: {
                 name: 'path',
                 classes: ['svg-g2-path'],
@@ -228,46 +228,46 @@ export default class WarningBlockEditing extends Plugin {
             }
         } );
 
-        // <warningBlockBodyContainer> converters
+        // <informationBlockBodyContainer> converters
         conversion.for( 'upcast' ).elementToElement( {
-            model: 'warningBlockBodyContainer',
+            model: 'informationBlockBodyContainer',
             view: {
                 name: 'div',
                 classes: ['information-body']
             }
         } );
         conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'warningBlockBodyContainer',
+            model: 'informationBlockBodyContainer',
             view: {
                 name: 'div',
                 classes: ['information-body']
             }
         } );
         conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'warningBlockBodyContainer',
+            model: 'informationBlockBodyContainer',
             view: ( modelElement, { writer: viewWriter } ) => {
                 const div = viewWriter.createContainerElement( 'div', { class: 'information-body' } );
                 return toWidget( div, viewWriter );
             }
         } );
 
-        // <warningBlockBodyParagraph> converters
+        // <informationBlockBodyParagraph> converters
         conversion.for( 'upcast' ).elementToElement( {
-            model: 'warningBlockBodyParagraph',
+            model: 'informationBlockBodyParagraph',
             view: {
                 name: 'p',
                 classes: ['m-0']
             }
         } );
         conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'warningBlockBodyParagraph',
+            model: 'informationBlockBodyParagraph',
             view: {
                 name: 'p',
                 classes: ['m-0']
             }
         } );
         conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'warningBlockBodyParagraph',
+            model: 'informationBlockBodyParagraph',
             view: ( modelElement, { writer: viewWriter } ) => {
                 const p = viewWriter.createEditableElement( 'p', { class: 'm-0' } );
                 return toWidgetEditable( p, viewWriter );

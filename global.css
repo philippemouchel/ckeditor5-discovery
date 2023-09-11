@@ -66,6 +66,29 @@ p.small {
     border-left: 4px solid #ffd200;
 }
 
+.color--dark {
+    color: #050504 !important;
+}
+.alert-danger {
+    border-left-color: #c14d00;
+    color: #281000;
+    background-color: rgba(193,77,0,.15);
+}
+.btn-label, .pl-3, .px-3 {
+    padding-left: 1rem!important;
+}
+.btn-label, .pr-3, .px-3 {
+    padding-right: 1rem!important;
+}
+.p-2 {
+    padding: 0.5rem!important;
+}
+.alert-danger {
+    color: #642800;
+    background-color: #f3dbcc;
+    border-color: #eecdb8;
+}
+
 .align-items-center {
     align-items: center !important;
 }
