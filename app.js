@@ -15,7 +15,8 @@ import Abbreviation from './abbreviation/abbreviation';
 import SimpleBox from './simplebox/simplebox';
 import NoteBlock from './noteBlock/noteBlock';
 import InformationBlock from './informationBlock/informationBlock';
-import WarningBlock from "./warningBlock/warningBlock";
+import WarningBlock from './warningBlock/warningBlock';
+import ReminderBlock from './reminderBlock/reminderBlock';
 
 class Timestamp extends Plugin {
     init() {
@@ -70,14 +71,14 @@ function buildEditor() {
                 Essentials, Heading, Paragraph, List, SourceEditing,
                 Bold, Underline, Strikethrough, Italic,
                 Timestamp, Abbreviation, SimpleBox,
-                NoteBlock, InformationBlock, WarningBlock,
+                NoteBlock, InformationBlock, WarningBlock, ReminderBlock,
             ],
             toolbar: [
                 'sourceEditing', '|', 'heading', '|',
                 'bold', 'underline', 'strikethrough', 'italic', '|',
                 'bulletedList', 'numberedList', '|',
                 'abbreviation', 'timestamp', '|', 'simpleBox', '|',
-                'noteBlock', 'informationBlock', 'warningBlock', '|',
+                'noteBlock', 'informationBlock', 'warningBlock', 'reminderBlock', '|',
             ],
             heading: {
                 options: [

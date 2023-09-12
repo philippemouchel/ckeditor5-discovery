@@ -26,7 +26,7 @@ function createWarningBlock( writer ) {
     writer.append( warningBlockParagraph, warningBlock );
 
     // Fill it with default values.
-    writer.appendText('Warning: warning content, to be replaced.', warningBlockParagraph)
+    writer.appendText('Warning: warning content, to be replaced.', warningBlockParagraph);
 
     return warningBlock;
 }

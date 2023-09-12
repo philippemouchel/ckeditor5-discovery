@@ -26,7 +26,7 @@ function createNoteBlock( writer ) {
     writer.append( noteBlockParagraph, noteBlock );
 
     // Fill it with default values.
-    writer.appendText('Note: note content, to be replaced.', noteBlockParagraph)
+    writer.appendText('Note: note content, to be replaced.', noteBlockParagraph);
 
     return noteBlock;
 }
