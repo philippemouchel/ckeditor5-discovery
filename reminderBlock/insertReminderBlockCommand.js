@@ -22,22 +22,16 @@ function createReminderBlock( writer ) {
     const reminderBlock = writer.createElement( 'reminderBlockSection' );
     const reminderBlockParagraph = writer.createElement( 'reminderBlockParagraph' );
     const reminderBlockList = writer.createElement( 'reminderBlockList' );
-    const reminderBlockListItem1 = writer.createElement( 'reminderBlockListItem' );
-    const reminderBlockListItem2 = writer.createElement( 'reminderBlockListItem' );
-    const reminderBlockListItem3 = writer.createElement( 'reminderBlockListItem' );
+    const reminderBlockListItem = writer.createElement( 'reminderBlockListItem' );
 
     // Build the reminder block.
     writer.append( reminderBlockParagraph, reminderBlock );
     writer.append( reminderBlockList, reminderBlock );
-    writer.append( reminderBlockListItem1, reminderBlockList );
-    writer.append( reminderBlockListItem2, reminderBlockList );
-    writer.append( reminderBlockListItem3, reminderBlockList );
+    writer.append( reminderBlockListItem, reminderBlockList );
 
     // Fill it with default values.
     writer.appendText('Keep in mind:', reminderBlockParagraph);
-    writer.appendText('Item 1', reminderBlockListItem1);
-    writer.appendText('Item 2', reminderBlockListItem2);
-    writer.appendText('Item 3', reminderBlockListItem3);
+    writer.appendText('List item', reminderBlockListItem);
 
     return reminderBlock;
 }

@@ -55,7 +55,7 @@ let editorBuilderButton = document.getElementById('build-editor');
 let editorDestroyerButton = document.getElementById('destroy-editor');
 
 // Init editor on page load.
-buildEditor();
+// buildEditor();
 
 // Attach functions to buttons click event.
 editorBuilderButton.onclick = function() { buildEditor() };

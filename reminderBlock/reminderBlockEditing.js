@@ -36,7 +36,6 @@ export default class ReminderBlockEditing extends Plugin {
         schema.register( 'reminderBlockList', {
             // isLimit: true,
             allowIn: 'reminderBlockSection',
-            inheritAllFrom: '$list',
         } );
 
         // Define the "reminderBlock list item" schema.
@@ -97,6 +96,13 @@ export default class ReminderBlockEditing extends Plugin {
         } );
 
         // <reminderBlockList> converters
+        // conversion.elementToElement( {
+        //     model: 'reminderBlockList',
+        //     view: {
+        //         name: 'ul',
+        //         classes: ['reminder-list', 'ml-2'],
+        //     }
+        // } );
         conversion.for( 'upcast' ).elementToElement( {
             model: 'reminderBlockList',
             view: {
@@ -114,7 +120,7 @@ export default class ReminderBlockEditing extends Plugin {
         conversion.for( 'editingDowncast' ).elementToElement( {
             model: 'reminderBlockList',
             view: ( modelElement, { writer: viewWriter } ) => {
-                const ul = viewWriter.createEditableElement( 'p', { class: 'ml-2' } );
+                const ul = viewWriter.createEditableElement( 'ul', { class: 'reminder-list ml-2' } );
                 return toWidgetEditable( ul, viewWriter );
             }
         } );
