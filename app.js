@@ -1,12 +1,15 @@
 import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
 
-import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic';
+// import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+
 import { Bold, Underline, Strikethrough, Italic } from '@ckeditor/ckeditor5-basic-styles';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
 import { Heading } from '@ckeditor/ckeditor5-heading';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { List } from '@ckeditor/ckeditor5-list';
 import { SourceEditing } from '@ckeditor/ckeditor5-source-editing';
+import { GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support';
 
 import { Plugin } from '@ckeditor/ckeditor5-core';
 import { ButtonView } from '@ckeditor/ckeditor5-ui';
@@ -17,6 +20,7 @@ import NoteBlock from './noteBlock/noteBlock';
 import InformationBlock from './informationBlock/informationBlock';
 import WarningBlock from './warningBlock/warningBlock';
 import ReminderBlock from './reminderBlock/reminderBlock';
+import PhilBlock from './philBlock/philBlock';
 
 class Timestamp extends Plugin {
     init() {
@@ -55,7 +59,7 @@ let editorBuilderButton = document.getElementById('build-editor');
 let editorDestroyerButton = document.getElementById('destroy-editor');
 
 // Init editor on page load.
-// buildEditor();
+buildEditor();
 
 // Attach functions to buttons click event.
 editorBuilderButton.onclick = function() { buildEditor() };
@@ -68,16 +72,20 @@ function buildEditor() {
     ClassicEditor
         .create( editorContainer, {
             plugins: [
-                Essentials, Heading, Paragraph, List, SourceEditing,
+                GeneralHtmlSupport,
+                Essentials, Heading, Paragraph, List,
+                SourceEditing,
                 Bold, Underline, Strikethrough, Italic,
                 Timestamp, Abbreviation, SimpleBox,
                 NoteBlock, InformationBlock, WarningBlock, ReminderBlock,
+                PhilBlock,
             ],
             toolbar: [
-                'sourceEditing', '|', 'heading', '|',
+                'sourceEditing', '|',
+                'heading', '|',
                 'bold', 'underline', 'strikethrough', 'italic', '|',
                 'bulletedList', 'numberedList', '|',
-                'abbreviation', 'timestamp', '|', 'simpleBox', '|',
+                'abbreviation', 'timestamp', 'simpleBox', '|',
                 'noteBlock', 'informationBlock', 'warningBlock', 'reminderBlock', '|',
             ],
             heading: {
@@ -87,7 +95,13 @@ function buildEditor() {
                     { model: 'heading4', view: 'h4', title: 'Heading 4' },
                     { model: 'paragraph', title: 'Paragraph' },
                 ]
-            }
+            },
+            htmlSupport: {
+                allow: [
+                    { name: 'div',      classes: true },
+                    { name: 'section',  classes: true },
+                ]
+            },
         } )
         .then( editor => {
             CKEditorInspector.attach( editor );
