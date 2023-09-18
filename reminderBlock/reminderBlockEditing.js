@@ -34,15 +34,8 @@ export default class ReminderBlockEditing extends Plugin {
 
         // Define the "reminderBlock list" schema.
         schema.register( 'reminderBlockList', {
-            // isLimit: true,
+						allowChildren: 'listItem',
             allowIn: 'reminderBlockSection',
-        } );
-
-        // Define the "reminderBlock list item" schema.
-        schema.register( 'reminderBlockListItem', {
-            // isLimit: true,
-            allowIn: 'reminderBlockList',
-            allowContentOf: '$block',
         } );
     }
 
@@ -77,74 +70,43 @@ export default class ReminderBlockEditing extends Plugin {
             model: 'reminderBlockParagraph',
             view: {
                 name: 'p',
-                classes: ['font-weight-medium', 'mb-2']
+                classes: ['mb-2']
             }
         } );
         conversion.for( 'dataDowncast' ).elementToElement( {
             model: 'reminderBlockParagraph',
             view: {
                 name: 'p',
-                classes: ['font-weight-medium', 'mb-2']
+                classes: ['mb-2']
             }
         } );
         conversion.for( 'editingDowncast' ).elementToElement( {
             model: 'reminderBlockParagraph',
             view: ( modelElement, { writer: viewWriter } ) => {
-                const p = viewWriter.createEditableElement( 'p', { class: 'font-weight-medium mb-2' } );
+                const p = viewWriter.createEditableElement( 'p', { class: 'mb-2' } );
                 return toWidgetEditable( p, viewWriter );
             }
         } );
 
-        // <reminderBlockList> converters
-        // conversion.elementToElement( {
-        //     model: 'reminderBlockList',
-        //     view: {
-        //         name: 'ul',
-        //         classes: ['reminder-list', 'ml-2'],
-        //     }
-        // } );
         conversion.for( 'upcast' ).elementToElement( {
             model: 'reminderBlockList',
             view: {
-                name: 'ul',
+                name: 'div',
                 classes: ['reminder-list', 'ml-2'],
             }
         } );
         conversion.for( 'dataDowncast' ).elementToElement( {
             model: 'reminderBlockList',
             view: {
-                name: 'ul',
+                name: 'div',
                 classes: ['reminder-list', 'ml-2'],
             }
         } );
         conversion.for( 'editingDowncast' ).elementToElement( {
             model: 'reminderBlockList',
             view: ( modelElement, { writer: viewWriter } ) => {
-                const ul = viewWriter.createEditableElement( 'ul', { class: 'reminder-list ml-2' } );
+                const ul = viewWriter.createEditableElement( 'div', { class: 'reminder-list ml-2' } );
                 return toWidgetEditable( ul, viewWriter );
-            }
-        } );
-
-        // <reminderBlockListItem> converters
-        conversion.for( 'upcast' ).elementToElement( {
-            model: 'reminderBlockListItem',
-            view: {
-                name: 'li',
-                classes: ['reminder-list-item'],
-            }
-        } );
-        conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'reminderBlockListItem',
-            view: {
-                name: 'li',
-                classes: ['reminder-list-item'],
-            }
-        } );
-        conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'reminderBlockListItem',
-            view: ( modelElement, { writer: viewWriter } ) => {
-                const li = viewWriter.createEditableElement( 'li', { class: 'reminder-list-item' } );
-                return toWidgetEditable( li, viewWriter );
             }
         } );
     }
